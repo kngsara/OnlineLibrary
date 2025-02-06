@@ -1,0 +1,156 @@
+﻿@using Shared
+@model Shared.MemberDTO
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(90deg, #FFD286, #FF6474, #7DA2FF);
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+        z-index: 1; 
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: transparent;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+        color: #fff;
+    }
+
+
+    h1 {
+        margin-bottom: 1rem;
+        color: #333;
+        font-size: 2rem;
+    }
+
+    hr {
+        margin: 1.5rem 0;
+        border: 0;
+        height: 1px;
+        background: #ddd;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+            .form-group input:focus {
+                border-color: #FF6474;
+                outline: none;
+                box-shadow: 0 0 5px rgba(255, 100, 116, 0.5);
+            }
+
+        .form-group .text-danger {
+            color: #FF6474;
+            font-size: 0.9rem;
+        }
+
+    .btn-primary {
+        background-color: #FF6474;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+        .btn-primary:hover {
+            background-color: #e85563;
+        }
+
+    a {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #FF6474;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+
+
+
+<hr />
+<h1>Register</h1>
+<div class="container">
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lozinka" class="control-label"></label>
+                <input asp-for="Lozinka" class="form-control" type="password" />
+                <span asp-validation-for="Lozinka" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn-primary" />
+            </div>
+        </form>
+</div>
+
+@if (ViewBag.Response != null && ViewBag.Response.Status == ResultStatus.Success)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Response.Message
+    </div>
+}
+else if (ViewBag.Response != null && ViewBag.Response.Status != ResultStatus.Success)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Response.Message
+    </div>
+}
+
+<div>
+    <a asp-action="Login">Back to Login</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

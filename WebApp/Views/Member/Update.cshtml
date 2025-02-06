@@ -1,0 +1,92 @@
+﻿@model Shared.MemberDTO
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(90deg, #FFD286, #FF6474, #7DA2FF);
+        height: 100vh;
+    }
+
+    .btn-primary {
+        background-color: #FF6474;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        text-decoration: none; 
+        display: inline-block;
+        margin: 0.5rem; 
+    }
+
+        .btn-primary:hover {
+            background-color: #e85563;
+</style>
+
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="editForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="MemberId" id="MemberId" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" id="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@if (ViewBag.Response != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Response
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('#editForm').on('submit', function (e) {
+                e.preventDefault();
+                var memberDTO = {
+                    MemberId: $('#MemberId').val(),
+                    Username: $('#Username').val(),
+                };
+
+                $.ajax({
+                    type: "PUT",
+                    url: "@Url.Action("Update")",
+                    dataType: "json",
+                    data: memberDTO,
+                    success: function (data) {
+                        alert("Username changed");
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

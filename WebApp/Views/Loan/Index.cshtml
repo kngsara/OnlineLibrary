@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Shared.LoanDTO>
+
+<style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #FFD286, #FF6474, #7DA2FF);
+            height: 100vh;
+        }
+
+    .table {
+        width: 100%;
+        margin-top: 30px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+</style>
+
+@{
+    ViewData["Title"] = "Loans";
+}
+
+<h1>Loans</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member.Username)
+            </th>
+            <th>
+                @Html.Label("Loan Date")
+            </th>
+            <th>
+                @Html.Label("Return Date")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(ModelItem => item.LoanDate)
+            </td>
+            <td>
+                @if (item.ReturnDate != null)
+                    {
+                        @Html.DisplayFor(ModelItem => item.ReturnDate)
+                    }
+                
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

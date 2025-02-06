@@ -1,0 +1,96 @@
+﻿@using Shared
+@model Shared.BookDTO
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(90deg, #FFD286, #FF6474, #7DA2FF);
+        height: 100vh;
+    }
+
+    .btn-primary {
+        background-color: #FF6474;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0.5rem;
+    }
+
+        .btn-primary:hover {
+            background-color: #e85563;
+        }
+</style>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Isbn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Isbn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublishedYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublishedYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Authors)
+        </dt>
+        <dd class = "col-sm-10">
+            @foreach (var author in Model.Authors)
+            {
+                <p>@author.FullName</p>
+                @Html.ActionLink("Author details", "Details", "Author", new { id = author.AuthorId }, new { @class = "btn-primary" })
+            }
+        </dd>
+    </dl>
+</div>
+
+@if (ViewBag.Response != null && ViewBag.Response.Status == ResultStatus.Success)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Response.Message
+    </div>
+}
+else if (ViewBag.Response != null && ViewBag.Response.Status != ResultStatus.Success)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Response.Message
+    </div>
+}
+
+<div>
+    @if (Context.Session.GetString("Username") != "admin")
+    {
+        @Html.ActionLink("Take", "Create", "Loan", new { id = Model.BookId }, new { @class = "btn-primary" })
+
+    }
+
+</div>

@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<title>Online Book Library</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #FFD286, #FF6474, #7DA2FF);
+            height: 100vh;
+        }
+
+        .container {
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .text-section {
+            max-width: 400px;
+        }
+
+            .text-section h1 {
+                font-weight:bold;
+                font-size: 4rem;
+                margin-bottom: 5rem;
+                color: white;
+            }
+
+            .text-section p {
+                color: white;
+                font-size: 2rem;
+
+            }
+
+            .text-section button {
+                margin-top: 5rem;
+                padding: 0.8rem 1.5rem;
+                background-color: white;
+                color: #FF6474;
+                border: none;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+                .text-section button:hover {
+                    background-color: #444;
+                }
+
+        .image-section img {
+            max-width: auto;
+            height: auto;
+        }
+
+    </style>
+
+    <body>
+        <div class="container">
+            <div class="text-section">
+                <h1>Online book library</h1>
+                <p>All stuff bookworms need. In one place.</p>
+            </div>
+            <div class="image-section">
+                <img src="\Img\comp.png" alt="Book library illustration">
+            </div>
+
+        </div>
+    </body>
+
